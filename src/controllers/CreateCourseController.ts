@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 
-import { CreateUserService } from "../services/CreateCourseService";
+import { CreateCourseService } from "../services/CreateCourseService";
 
 
-class CreateUserController {
+class CreateCourseController {
   async handle(request: Request, response: Response) {
     const { name } = request.body
 
-    const createCourseService = new CreateUserService()
+    const createCourseService = new CreateCourseService()
 
     const course = await createCourseService.execute(name)
 
@@ -15,4 +15,4 @@ class CreateUserController {
   }
 }
 
-export { CreateUserController }
+export { CreateCourseController }

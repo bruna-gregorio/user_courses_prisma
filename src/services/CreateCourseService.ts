@@ -1,7 +1,7 @@
 import prismaClient from "../prisma"
 
 
-class CreateUserService {
+class CreateCourseService {
   async execute(name: string) {
     const courseExists = await prismaClient.course.findFirst({
       where: {
@@ -19,4 +19,4 @@ class CreateUserService {
   }
 }
 
-export { CreateUserService }
+export { CreateCourseService }
