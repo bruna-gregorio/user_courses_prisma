@@ -9,10 +9,11 @@ class DeleteCourseController {
 
     const deleteCourseService = new DeleteCourseService()
 
-    await deleteCourseService.execute(id)
+    const courseDeleted = await deleteCourseService.execute(id)
 
     return response.json({
-      message: "Course deleted successfully!"
+      message: 'Course deleted successfully!',
+      courseDeleted
     })
   }
 }

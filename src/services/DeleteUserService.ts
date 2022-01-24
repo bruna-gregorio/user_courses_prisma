@@ -13,13 +13,22 @@ class DeleteUserService {
       throw new Error("User not found!")
     }
 
-    await prismaClient.user.delete({
+    const userDeleted = await prismaClient.user.delete({
       where: {
         id: id
+      },
+      select: {
+        name: true,
+        course: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
       }
     })
 
-    return
+    return userDeleted
   }
 }
 

@@ -9,10 +9,11 @@ class DeleteUserController {
 
     const deleteUserService = new DeleteUserService()
 
-    await deleteUserService.execute(id)
+    const userDeleted = await deleteUserService.execute(id)
 
     return response.json({
-      message: "User deleted successfully!"
+      message: "User deleted successfully!",
+      userDeleted
     })
   }
 }

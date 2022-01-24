@@ -13,13 +13,17 @@ class DeleteCourseService {
       throw new Error("Course not found!")
     }
 
-    await prismaClient.course.delete({
+    const courseDeleted = await prismaClient.course.delete({
       where: {
         id: id
+      },
+      select: {
+        id: true,
+        name: true
       }
     })
 
-    return
+    return courseDeleted
   }
 }
 
