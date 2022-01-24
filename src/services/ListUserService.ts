@@ -10,6 +10,9 @@ class ListUserService {
             name: true
           }
         }
+      },
+      orderBy: {
+        name: "asc"
       }
     })
 
