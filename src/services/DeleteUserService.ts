@@ -1,7 +1,6 @@
 import prismaClient from "../prisma"
 
 
-
 class DeleteUserService {
   async execute(id: string) {
     const userExists = await prismaClient.user.findUnique({
