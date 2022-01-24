@@ -26,6 +26,9 @@ class UpdateUserService {
         email: email,
         password: passwordHash,
         course_id: course_id
+      },
+      include: {
+        course: true
       }
     })
 
