@@ -14,6 +14,16 @@ interface IUserRequest {
 
 class UpdateUserService {
   async execute({ id, name, age, email, password, course_id }: IUserRequest) {
+    const userExists = await prismaClient.user.findUnique({
+      where: {
+        id: id
+      }
+    })
+
+    if (!userExists) {
+      throw new Error("User not found!")
+    }
+
     const passwordHash = await hash(password, 8)
 
     const updateUser = await prismaClient.user.update({

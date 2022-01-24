@@ -4,15 +4,15 @@ import prismaClient from "../prisma"
 
 class UpdateCourseService {
   async execute(id: string, name: string) {
-    // const course = await prismaClient.course.findUnique({
-    //   where: {
-    //     id: id
-    //   }
-    // })
+    const courseExists = await prismaClient.course.findUnique({
+      where: {
+        id: id
+      }
+    })
 
-    // course.name = name ? name : course.name 
-
-    // return course
+    if (!courseExists) {
+      throw new Error("Course not found!")
+    }
 
     const updateCourse = await prismaClient.course.update({
       where: {
