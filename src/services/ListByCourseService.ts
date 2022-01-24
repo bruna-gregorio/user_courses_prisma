@@ -16,6 +16,9 @@ class ListByCourseService {
     const filterbyCourse = await prismaClient.user.findMany({
       where: {
         course_id: course_id
+      },
+      orderBy: {
+        name: "asc"
       }
     })
     return filterbyCourse
