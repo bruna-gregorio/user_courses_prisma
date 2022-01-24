@@ -1,4 +1,5 @@
 import prismaClient from "../prisma"
+import * as Yup from "yup"
 
 
 class CreateCourseService {
@@ -13,7 +14,15 @@ class CreateCourseService {
       throw new Error("Course already exists!")
     }
 
-    const course = await prismaClient.course.create({ data: { name } })
+    const data = { name }
+
+    const schema = Yup.object().shape({
+      name: Yup.string().required()
+    })
+
+    await schema.validate(data)
+
+    const course = await prismaClient.course.create({ data: data })
 
     return course
   }

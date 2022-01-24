@@ -1,4 +1,5 @@
 import { hash } from "bcryptjs";
+import * as Yup from "yup"
 
 import prismaClient from "../prisma";
 
@@ -25,14 +26,20 @@ class CreateUserService {
       throw new Error("User already exists!")
     }
 
+    const userInfo = { name, age, email, password: passwordHash, course_id }
+
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      age: Yup.number().required().positive().integer(),
+      email: Yup.string().email().required(),
+      password: Yup.string().required().min(5),
+      course_id: Yup.string().required()
+    })
+
+    await schema.validate(userInfo)
+
     const user = await prismaClient.user.create({
-      data: {
-        name,
-        age,
-        email,
-        password: passwordHash,
-        course_id
-      },
+      data: userInfo,
       include: {
         course: true
       }
