@@ -1,4 +1,5 @@
 import { hash } from "bcryptjs"
+import * as Yup from "yup"
 
 import prismaClient from "../prisma"
 
@@ -42,8 +43,21 @@ class UpdateUserService {
       }
     })
 
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      age: Yup.number().required().positive().integer(),
+      email: Yup.string().email().required(),
+      password: Yup.string().required().min(5),
+      course_id: Yup.string().required()
+    })
+
+    await schema.validate(updateUser)
+
     return updateUser
   }
 }
 
 export { UpdateUserService }
+
+
+// validar os campo do update
