@@ -27,6 +27,7 @@ model User {
   age        String
   email      String
   password   String
+  photo      String
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
 
